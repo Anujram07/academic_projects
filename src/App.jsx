@@ -1,32 +1,31 @@
-import { useState } from 'react'
-import { InputBox } from './Components'
-import { useCurrencyInfo } from "./hooks";
-
+import { useState } from "react";
+import { InputBox } from "./Components";
+import useCurrencyInfo from "./hooks/useCurrencyInfo";
 
 function App() {
-  const [amount, setAmount] = useState(0)
-  const [from, setFrom] = useState("usd")
-  const [to, setTo] = useState("inr")
-  const [convertedAmount, setConvertedAmount] = useState(0)
+  const [amount, setAmount] = useState(0);
+  const [from, setFrom] = useState("usd");
+  const [to, setTo] = useState("inr");
+  const [convertedAmount, setConvertedAmount] = useState(0);
 
-  const currencyInfo = useCurrencyInfo(from)
-  const options = Object.keys(currencyInfo)
+  const currencyInfo = useCurrencyInfo(from);
+  const options = Object.keys(currencyInfo);
 
   const swap = () => {
-    const tempFrom = from
-    const tempAmount = amount
+    const tempFrom = from;
+    const tempAmount = amount;
 
-    setFrom(to)
-    setTo(tempFrom)
+    setFrom(to);
+    setTo(tempFrom);
 
-    setAmount(convertedAmount)
-    setConvertedAmount(tempAmount)
-  }
+    setAmount(convertedAmount);
+    setConvertedAmount(tempAmount);
+  };
 
   const convert = () => {
-    if (!currencyInfo[to]) return
-    setConvertedAmount(amount * currencyInfo[to])
-  }
+    if (!currencyInfo[to]) return;
+    setConvertedAmount(amount * currencyInfo[to]);
+  };
 
   return (
     <div
@@ -38,8 +37,8 @@ function App() {
       <div className="w-full max-w-md mx-auto border rounded-lg p-5 backdrop-blur-sm bg-white/30">
         <form
           onSubmit={(e) => {
-            e.preventDefault()
-            convert()
+            e.preventDefault();
+            convert();
           }}
         >
           <div className="w-full mb-1">
@@ -83,7 +82,7 @@ function App() {
         </form>
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
